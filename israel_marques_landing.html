@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Israel Marques · Advogado Trabalhista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0e0e;
+      --cream: #f5f0e8;
+      --parchment: #ede6d6;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --gold-pale: #f0d080;
+      --text: #1a1612;
+      --muted: #6b5f4e;
+      --rule: #c8b896;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      background-color: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ─────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background-color: var(--ink);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(184,134,11,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(184,134,11,0.05) 0%, transparent 50%);
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(184,134,11,0.06) 80px);
+    }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 4rem;
+      border-bottom: 1px solid rgba(184,134,11,0.25);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+    }
+
+    .nav-oab {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.55);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav ul a:hover { color: var(--gold-light); }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 4rem 2rem;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(245,240,232,0.65);
+      max-width: 540px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s ease forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s ease forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(184,134,11,0.4);
+      color: var(--gold-pale);
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-footer {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 4rem;
+      border-top: 1px solid rgba(184,134,11,0.15);
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 48px;
+      background: rgba(184,134,11,0.2);
+    }
+
+    /* ── SECTION SHARED ───────────────────────────── */
+    section { padding: 7rem 4rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    /* ── SOBRE ────────────────────────────────────── */
+    .sobre {
+      background: var(--parchment);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .sobre-text h2 { margin-bottom: 2rem; }
+
+    .sobre-text h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .sobre-body {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .sobre-body p + p { margin-top: 1.25rem; }
+
+    .sobre-aside {
+      border-left: 2px solid var(--gold);
+      padding-left: 3rem;
+    }
+
+    .sobre-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .sobre-quote-attr {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ATUAÇÃO ──────────────────────────────────── */
+    .atuacao {
+      background: var(--ink);
+    }
+
+    .atuacao .section-label { color: var(--gold); }
+    .atuacao h2 { color: var(--cream); margin-bottom: 4rem; }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(184,134,11,0.15);
+      border: 1px solid rgba(184,134,11,0.15);
+    }
+
+    .area-card {
+      background: var(--ink);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .area-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .area-card:hover { background: #151410; }
+    .area-card:hover::before { transform: scaleX(1); }
+
+    .area-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(184,134,11,0.12);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .area-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .area-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(245,240,232,0.45);
+    }
+
+    /* ── EXPERIÊNCIA ──────────────────────────────── */
+    .experiencia {
+      background: var(--cream);
+    }
+
+    .experiencia h2 { margin-bottom: 4rem; }
+
+    .timeline {
+      position: relative;
+      max-width: 780px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .timeline-item {
+      padding-left: 3rem;
+      padding-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .timeline-period {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-org {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-bullets li {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #4a3f2f;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .timeline-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+
+    /* ── COMPETÊNCIAS ─────────────────────────────── */
+    .competencias {
+      background: var(--parchment);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .competencias h2 { margin-bottom: 3rem; }
+
+    .comp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .comp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .comp-item:first-child { border-top: 1px solid var(--rule); }
+
+    .comp-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .comp-text {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .comp-text strong {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .formacao h2 { margin-bottom: 2.5rem; }
+
+    .formacao-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .formacao-item:first-of-type { border-top: 1px solid var(--rule); }
+
+    .formacao-periodo {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .formacao-curso {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .formacao-inst {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ── CONTATO ──────────────────────────────────── */
+    .contato {
+      background: var(--ink);
+      text-align: center;
+      padding: 8rem 4rem;
+    }
+
+    .contato .section-label {
+      justify-content: center;
+    }
+
+    .contato .section-label::before { display: none; }
+    .contato .section-label::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .contato h2 {
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .contato-sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 3.5rem;
+    }
+
+    .contato-cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contato-card {
+      border: 1px solid rgba(184,134,11,0.3);
+      padding: 1.75rem 2.5rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 180px;
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+    }
+
+    .contato-card:hover {
+      border-color: var(--gold);
+      background: rgba(184,134,11,0.05);
+      transform: translateY(-4px);
+    }
+
+    .contato-card-icon {
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+
+    .contato-card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+    }
+
+    .contato-card-value {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: #080807;
+      padding: 2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(184,134,11,0.1);
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: rgba(245,240,232,0.3);
+    }
+
+    .footer-note {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.2);
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      nav ul { display: none; }
+
+      section { padding: 5rem 2rem; }
+
+      .hero-content { padding: 3rem 2rem 1.5rem; }
+      .hero-footer { padding: 1.5rem 2rem; flex-wrap: wrap; gap: 1rem; }
+
+      .sobre { grid-template-columns: 1fr; gap: 3rem; }
+      .sobre-aside { border-left: none; padding-left: 0; border-top: 2px solid var(--gold); padding-top: 2rem; }
+
+      .areas-grid { grid-template-columns: 1fr; }
+
+      .competencias { grid-template-columns: 1fr; gap: 3rem; }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+
+    <nav>
+      <div>
+        <div class="nav-logo">Israel Marques</div>
+        <div class="nav-oab">OAB/CE 52.666</div>
+      </div>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#atuacao">Atuação</a></li>
+        <li><a href="#experiencia">Experiência</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Advocacia Trabalhista · Fortaleza, CE</p>
+      <h1>Israel<br /><em>Marques</em></h1>
+      <p class="hero-desc">
+        Advocacia trabalhista estratégica — contencioso, carteiras massificadas,
+        audiências, recursos e conformidade empresarial com rigor técnico e resultado.
+      </p>
+      <div class="hero-cta">
+        <a href="https://wa.me/5585996954473" class="btn-primary">
+          ☎ Falar com o Advogado
+        </a>
+        <a href="#atuacao" class="btn-secondary">
+          Ver Áreas de Atuação →
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-footer">
+      <div class="hero-stat">
+        <span class="hero-stat-num">+5 anos</span>
+        <span class="hero-stat-label">de experiência forense</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">UFC</span>
+        <span class="hero-stat-label">Graduação em Direito</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">TST · STF</span>
+        <span class="hero-stat-label">Pesquisa jurisprudencial</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">Pós-grad.</span>
+        <span class="hero-stat-label">Direito e Processo do Trabalho</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre reveal" id="sobre">
+    <div class="sobre-text">
+      <p class="section-label">Sobre</p>
+      <h2>Técnica forense<br />a serviço do <em>resultado</em></h2>
+      <div class="sobre-body">
+        <p>
+          Advogado trabalhista com sólida atuação em contencioso estratégico e carteiras
+          massificadas — tanto para empresas quanto para trabalhadores. Com passagem pelo
+          Tribunal Regional do Trabalho da 7ª Região e por escritórios de referência em
+          Fortaleza, desenvolvi expertise em todas as fases do processo: da audiência
+          inaugural ao TST.
+        </p>
+        <p>
+          Atualmente na <strong>Menescal e Marcel Advogados</strong>, conduzo carteiras
+          trabalhistas empresariais com foco em eficiência, padronização de peças e
+          controle rigoroso de prazos e SLA. Combino profundidade técnica com visão
+          prática de gestão do passivo.
+        </p>
+        <p>
+          Em paralelo, aprofundo minha formação na pós-graduação em Direito e Processo
+          do Trabalho pela UniChristus, com ênfase em prática recursal, execução e
+          saúde e segurança do trabalho.
+        </p>
+      </div>
+    </div>
+    <div class="sobre-aside">
+      <p class="sobre-quote">
+        "A defesa eficaz começa muito antes da audiência — nasce no domínio
+        da jurisprudência e na precisão da estratégia."
+      </p>
+      <p class="sobre-quote-attr">Israel Marques · Advogado Trabalhista</p>
+    </div>
+  </section>
+
+  <!-- ATUAÇÃO -->
+  <section class="atuacao reveal" id="atuacao">
+    <p class="section-label">Áreas de Atuação</p>
+    <h2 style="color:var(--cream); margin-bottom:4rem;">O que posso<br />fazer por você</h2>
+
+    <div class="areas-grid">
+      <div class="area-card">
+        <div class="area-num">01</div>
+        <div class="area-title">Contencioso Trabalhista Empresarial</div>
+        <div class="area-desc">Elaboração de contestações, recursos ordinários e de revista, agravos e contrarrazões. Gestão de carteiras massificadas com indicadores de SLA, qualidade de peça e evolução do passivo.</div>
+      </div>
+      <div class="area-card">
+        <div class="area-num">02</div>
+        <div class="area-title">Audiências e Condução de Prova</div>
+        <div class="area-desc">Representação em audiências iniciais e de instrução (presenciais e telepresenciais). Preparação de clientes e testemunhas, definição de tese probatória e diligências em Varas e gabinetes.</div>
+      </div>
+      <div class="area-card">
+        <div class="area-num">03</div>
+        <div class="area-title">Recursos até o TST</div>
+        <div class="area-desc">Atuação recursal estratégica com visão de RG/IRR/IAC. Pesquisa de Súmulas, OJs e precedentes vinculantes. Preservação de prequestionamento desde a contestação.</div>
+      </div>
+      <div class="area-card">
+        <div class="area-num">04</div>
+        <div class="area-title">Doença Ocupacional e Perícias</div>
+        <div class="area-desc">Suporte técnico-jurídico em processos de doença ocupacional e NTEP. Elaboração de quesitos, acompanhamento de perícias, impugnação de laudos e interface com SESMT e clínicas.</div>
+      </div>
+      <div class="area-card">
+        <div class="area-num">05</div>
+        <div class="area-title">Verbas Rescisórias e Adicionais</div>
+        <div class="area-desc">Jornada, banco de horas, teletrabalho, equiparação salarial, insalubridade, periculosidade, FGTS, justa causa, multas, gratificação de função e verbas de bancários.</div>
+      </div>
+      <div class="area-card">
+        <div class="area-num">06</div>
+        <div class="area-title">Compliance Trabalhista</div>
+        <div class="area-desc">Consultoria preventiva: controles de jornada, EPIs, NRs, políticas internas, PGR/PCMSO, terceirização, responsabilidade subsidiária e LGPD aplicada ao RH/DP.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="experiencia reveal" id="experiencia">
+    <p class="section-label">Trajetória</p>
+    <h2>Experiência<br />Profissional</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-period">Nov/2025 – Atualmente</div>
+        <div class="timeline-org">Menescal e Marcel Advogados</div>
+        <div class="timeline-role">Advocacia Trabalhista Empresarial · Fortaleza/CE</div>
+        <ul class="timeline-bullets">
+          <li>Carteira massificada: elaboração de iniciais, contestações, recursos e manifestações.</li>
+          <li>Audiências iniciais e de instrução; acompanhamento de atos processuais.</li>
+          <li>Suporte consultivo trabalhista para clientes empresariais.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">Out/2024 – Nov/2025</div>
+        <div class="timeline-org">Albuquerque Rocha Advogados</div>
+        <div class="timeline-role">Advocacia Trabalhista (Reclamantes) · Fortaleza/CE</div>
+        <ul class="timeline-bullets">
+          <li>Audiências iniciais e de instrução; preparação de clientes e testemunhas.</li>
+          <li>Peças de alta complexidade: iniciais, RO, RR, agravos, memoriais e contrarrazões.</li>
+          <li>Pesquisa jurisprudencial (TST/STF) e mapeamento de riscos por tese.</li>
+          <li>Gestão de carteira massificada com controle de prazos, SLA e relatórios executivos.</li>
+          <li>Integração com clínicas, peritos, INSS e sindicatos; condução de fluxos periciais.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">Jan/2022 – Out/2024</div>
+        <div class="timeline-org">Leitão e Freitas Advogados</div>
+        <div class="timeline-role">Estagiário Jurídico → Advogado · Fortaleza/CE</div>
+        <ul class="timeline-bullets">
+          <li>Atuação contenciosa e consultiva: protocolos, relatórios e análise documental.</li>
+          <li>Pesquisa de jurisprudência, doutrina e legislação com reporte executivo.</li>
+          <li>Gestão de comunicações institucionais e diligências externas.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">Jan/2021 – Fev/2022</div>
+        <div class="timeline-org">TRT da 7ª Região</div>
+        <div class="timeline-role">Estagiário Jurídico · Fortaleza/CE</div>
+        <ul class="timeline-bullets">
+          <li>Análise de processos em 1ª instância e apoio à elaboração de minutas.</li>
+          <li>Acompanhamento estatístico e organização de acervo processual.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPETÊNCIAS + FORMAÇÃO -->
+  <section class="competencias reveal" id="competencias">
+    <div class="comp-col">
+      <p class="section-label">Competências</p>
+      <h2>Habilidades<br />Técnicas</h2>
+      <div class="comp-list">
+        <div class="comp-item">
+          <div class="comp-icon">⚖</div>
+          <div class="comp-text"><strong>Contencioso Estratégico</strong>Carteiras volumosas e casos de alta complexidade, com padronização de argumentos por famílias de temas.</div>
+        </div>
+        <div class="comp-item">
+          <div class="comp-icon">📋</div>
+          <div class="comp-text"><strong>Gestão de Prazos & SLA</strong>Controle por indicadores, priorização por criticidade e relatórios executivos de evolução do passivo.</div>
+        </div>
+        <div class="comp-item">
+          <div class="comp-icon">🔍</div>
+          <div class="comp-text"><strong>Pesquisa Jurisprudencial</strong>TST/STF — Súmulas, OJs, RG/IRR/IAC. Mapeamento de risco e custo por tese.</div>
+        </div>
+        <div class="comp-item">
+          <div class="comp-icon">🏛</div>
+          <div class="comp-text"><strong>Prática Recursal</strong>RO, RR, agravos, contrarrazões e memoriais com visão de Turmas/TRTs até o TST.</div>
+        </div>
+        <div class="comp-item">
+          <div class="comp-icon">💻</div>
+          <div class="comp-text"><strong>Tecnologia Jurídica</strong>PJe/Projudi, PJe-Calc, Office/Google Workspace. Treinamento em IA aplicada ao Direito.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formacao">
+      <p class="section-label">Formação</p>
+      <h2>Acadêmica</h2>
+
+      <div class="formacao-item">
+        <div class="formacao-periodo">Cursando</div>
+        <div class="formacao-curso">Pós-graduação · Direito e Processo do Trabalho</div>
+        <div class="formacao-inst">UniChristus · Fortaleza/CE</div>
+      </div>
+
+      <div class="formacao-item">
+        <div class="formacao-periodo">Fev/2018 – Jun/2023</div>
+        <div class="formacao-curso">Graduação em Direito</div>
+        <div class="formacao-inst">Universidade Federal do Ceará (UFC)</div>
+      </div>
+
+      <div class="formacao-item">
+        <div class="formacao-periodo">Formação Complementar</div>
+        <div class="formacao-curso">Gestão e Liderança · Compliance · Nova Lei de Licitações</div>
+        <div class="formacao-inst">UECE · UFC · Cursos especializados</div>
+      </div>
+
+      <div class="formacao-item">
+        <div class="formacao-periodo">Evento</div>
+        <div class="formacao-curso">Congresso Internacional de Direito Constitucional</div>
+        <div class="formacao-inst">EBEC/RN · Seminário Internacional de Negociação</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato reveal" id="contato">
+    <p class="section-label">Contato</p>
+    <h2>Vamos conversar<br />sobre seu caso?</h2>
+    <p class="contato-sub">Atendimento em Fortaleza/CE. Disponibilidade para audiências, sustentações orais e atuação remota.</p>
+
+    <div class="contato-cards">
+      <a href="https://wa.me/5585996954473" class="contato-card">
+        <span class="contato-card-icon">📱</span>
+        <span class="contato-card-label">WhatsApp</span>
+        <span class="contato-card-value">(85) 99695-4473</span>
+      </a>
+      <a href="mailto:israel.mrqs.alu@gmail.com" class="contato-card">
+        <span class="contato-card-icon">✉</span>
+        <span class="contato-card-label">E-mail</span>
+        <span class="contato-card-value">israel.mrqs.alu@gmail.com</span>
+      </a>
+      <div class="contato-card">
+        <span class="contato-card-icon">📍</span>
+        <span class="contato-card-label">Localização</span>
+        <span class="contato-card-value">Fortaleza, CE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Israel Marques · Advogado · OAB/CE 52.666</div>
+    <div class="footer-note">Advocacia Trabalhista · Fortaleza/CE · 2025</div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth active nav
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--gold-light)'
+          : '';
+      });
+    });
+  </script>
+
+</body>
+</html>
